@@ -8,16 +8,18 @@ import Login from './Components/Login/Login';
 
 const App = () => {
   return (
-    <div>
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="app">
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <main className="appBody">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </main>
         <Footer />
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 };
 

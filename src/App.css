@@ -38,8 +38,20 @@ input {
   color: #333;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   max-width: 50rem;
   padding: 0 1rem;
   margin: 0 auto;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.appBody {
+  padding-top: 5rem;
 }

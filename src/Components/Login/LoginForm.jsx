@@ -1,14 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../Forms/input';
+import Input from '../Forms/Input';
 import Button from '../Forms/Button';
+import useForm from '../../Hooks/userForm';
 
 const LoginForm = () => {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const username = useForm();
+  const password = useForm();
+
+  console.log(username.value);
+
+  console.log(password.value);
+  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [success, setSuccess] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -26,8 +31,8 @@ const LoginForm = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            username,
-            password,
+            username: username.value,
+            password: password.value,
           }),
         },
       );
@@ -51,24 +56,17 @@ const LoginForm = () => {
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <Input
-          label="Usuario"
-          type="text"
-          name="username"
-          value={username}
-          onChange={({ target }) => setUsername(target.value)}
-        />
+        <Input label="Usuario" type="text" name="username" {...username} />
         <Input
           label="Senha"
           type="password"
           name="password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
+          {...password}
+          error={error}
         />
-        {error ? <p>{error}</p> : null}
         {success ? <p>Login enviado com sucesso.</p> : null}
         <Button disabled={loading}>
-          {loading ? 'Entrando...' : 'Entrar'}
+          {loading ? 'Acessando...' : 'Entrar'}
         </Button>
       </form>
       <Link to="/login/perdeu">Perdeu a senha?</Link>

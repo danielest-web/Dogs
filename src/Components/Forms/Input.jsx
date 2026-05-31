@@ -1,10 +1,14 @@
 import React from 'react';
 import styles from './Input.module.css';
 
-const Input = ({ label, type, name, value, onChange }) => {
+const Input = ({ label, type, name, value, onChange, error, erro }) => {
+  const errorMessage = error || erro;
+
   return (
-    <div>
-      <label htmlFor={name}>{label}</label>
+    <div className={styles.wrapper}>
+      <label htmlFor={name} className={styles.label}>
+        {label}
+      </label>
       <input
         id={name}
         name={name}
@@ -12,7 +16,9 @@ const Input = ({ label, type, name, value, onChange }) => {
         type={type}
         value={value}
         onChange={onChange}
+        aria-invalid={!!errorMessage}
       />
+      {errorMessage ? <p className={styles.error}>{errorMessage}</p> : null}
     </div>
   );
 };

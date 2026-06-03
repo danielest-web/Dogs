@@ -8,15 +8,14 @@ const LoginForm = () => {
   const username = useForm();
   const password = useForm();
 
-  console.log(username.value);
-
-  console.log(password.value);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [success, setSuccess] = React.useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (!username.validate() || !password.validate()) return;
 
     try {
       setLoading(true);
@@ -43,7 +42,6 @@ const LoginForm = () => {
         throw new Error(json.message || 'Nao foi possivel fazer login.');
       }
 
-      console.log(json);
       setSuccess(true);
     } catch (err) {
       setError(err.message);
@@ -56,15 +54,26 @@ const LoginForm = () => {
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <Input label="Usuario" type="text" name="username" {...username} />
+        <Input
+          label="Usuario"
+          type="text"
+          name="username"
+          value={username.value}
+          onChange={username.onChange}
+          onBlur={username.onBlur}
+          error={username.error}
+        />
         <Input
           label="Senha"
           type="password"
           name="password"
-          {...password}
-          error={error}
+          value={password.value}
+          onChange={password.onChange}
+          onBlur={password.onBlur}
+          error={password.error}
         />
-        {success ? <p>Login enviado com sucesso.</p> : null}
+        {error ? <p>{error}</p> : null}
+        {success ? <p>Sucesso ao fazer login.</p> : null}
         <Button disabled={loading}>
           {loading ? 'Acessando...' : 'Entrar'}
         </Button>

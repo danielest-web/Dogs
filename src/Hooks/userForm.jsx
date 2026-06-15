@@ -12,7 +12,6 @@ const validators = {
 const useForm = (type) => {
   console.log("aqui e o valor tipo" ,type);
   //o que e  esse type que a gente ta passando aqui? Ele é o tipo do input, ou seja, se for email, ele vai validar o email, se for password, ele vai validar a senha, e assim por diante. Se for false, ele não vai validar nada, ou seja, qualquer valor é valido.
-  //
 
   const [value, setValue] = React.useState('');
   const [error, setError] = React.useState(null);

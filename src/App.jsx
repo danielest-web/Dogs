@@ -4,7 +4,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
 import Login from './Components/Login/Login';
-
+import { UserStorage } from './UserContext';
 const App = () => {
   return (
     <BrowserRouter>//serve para o React conseguir olhar a URL do navegador.

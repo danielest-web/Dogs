@@ -36,3 +36,23 @@
   position: relative;
   top: -1px;
 }
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.button {
+  background: transparent;
+  border: 0;
+  color: #333;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.button:hover,
+.button:focus {
+  text-decoration: underline;
+}

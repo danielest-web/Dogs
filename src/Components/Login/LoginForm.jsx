@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Input from '../Forms/Input';
-import Button from '../Forms/Button';
-import useForm from '../../Hooks/userForm';
-import { UserContext } from '../../UserContext';
+import React from "react";
+import { Link } from "react-router-dom";
+import Input from "../Forms/Input";
+import Button from "../Forms/Button";
+import useForm from "../../Hooks/userForm";
+import { UserContext } from "../../UserContext";
 
 const LoginForm = () => {
   const username = useForm();
   const password = useForm();
-  const { userLogin, loading, error} = React.useContext(UserContext);
+  const { userLogin, loading, error } = React.useContext(UserContext);
   const [success, setSuccess] = React.useState(false);
 
   async function handleSubmit(event) {
@@ -44,9 +44,13 @@ const LoginForm = () => {
         />
         {error ? <p>{error}</p> : null}
         {success ? <p>Sucesso ao fazer login.</p> : null}
-        <Button disabled={loading}>
-          {loading ? 'Acessando...' : 'Entrar'}
-        </Button>
+        {loading ? (
+          <Button disabled>Carregando...</Button>
+        ) : (
+          <Button disabled={loading}>
+            {loading ? "Acessando..." : "Entrar"}
+          </Button>
+        )}
       </form>
       <Link to="/login/perdeu">Perdeu a senha?</Link>
       <br />

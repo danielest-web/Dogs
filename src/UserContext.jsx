@@ -1,6 +1,6 @@
 import React from "react";
-import { TOKEN_POST, USER_GET, TOKEN_VALIDATE_POST } from "./api";
-
+import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from "./api";
+import { useNavigate } from "react-router-dom";
 export const UserContext = React.createContext();
 
 export const UserStorage = ({ children }) => {
@@ -8,37 +8,9 @@ export const UserStorage = ({ children }) => {
   const [login, setLogin] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const navigate = useNavigate();
 
-  React.useEffect(() => {
-    async function autoLogin() {
-      const token = window.localStorage.getItem("token");
-
-      if (token) {
-        try {
-          setError(null);
-          setLoading(true);
-
-          const { url, options } = TOKEN_VALIDATE_POST(token);
-          const response = await fetch(url, options);
-
-          if (!response.ok) throw new Error("Token invalido");
-
-          await getUser(token);
-        } catch (erro) {
-          window.localStorage.removeItem("token");
-          setError(erro.message);
-          setLogin(false);
-          setData(null);
-        } finally {
-          setLoading(false);
-        }
-      }
-    }
-
-    autoLogin();
-  }, []);
-
-  async function getUser(token) {
+  const getUser = React.useCallback(async (token) => {
     const { url, options } = USER_GET(token);
     const response = await fetch(url, options);
     const json = await response.json();
@@ -49,45 +21,78 @@ export const UserStorage = ({ children }) => {
 
     setData(json);
     setLogin(true);
-    console.log("aqui e o valor do json", json);
-  }
+  }, []);
 
-  async function userLogin(username, password) {
-    try {
-      setError(null);
-      setLoading(true);
+  const userLogin = React.useCallback(
+    async (username, password) => {
+      try {
+        setError(null);
+        setLoading(true);
 
-      const { url, options } = TOKEN_POST({ username, password });
-      const response = await fetch(url, options);
-      const json = await response.json();
+        const { url, options } = TOKEN_POST({ username, password });
+        const response = await fetch(url, options);
+        const json = await response.json();
 
-      if (!response.ok) {
-        throw new Error(json.message || "Nao foi possivel fazer login.");
+        if (!response.ok) {
+          throw new Error(json.message || "Nao foi possivel fazer login.");
+        }
+
+        window.localStorage.setItem("token", json.token);
+        await getUser(json.token);
+        navigate("/conta");
+        return true;
+      } catch (err) {
+        setError(err.message);
+        setLogin(false);
+        setData(null);
+        return false;
+      } finally {
+        setLoading(false);
       }
+    },
+    [getUser],
+  );
 
-      window.localStorage.setItem("token", json.token);
-      await getUser(json.token);
-      return true;
-    } catch (err) {
-      setError(err.message);
-      setLogin(false);
-      setData(null);
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function userLogout() {
+  const userLogout = React.useCallback(() => {
     setData(null);
-    setError(null); 
+    setError(null);
+    setLoading(false);
     setLogin(false);
-    setLoading(false);  
     window.localStorage.removeItem("token");
-  }
+    navitigate("/login");
+  }, []);
+
+  React.useEffect(() => {
+    async function autoLogin() {
+      const token = window.localStorage.getItem("token");
+
+      if (!token) return;
+
+      try {
+        setError(null);
+        setLoading(true);
+
+        const { url, options } = TOKEN_VALIDATE_POST(token);
+        const response = await fetch(url, options);
+
+        if (!response.ok) throw new Error("Token invalido");
+
+        await getUser(token);
+      } catch (err) {
+        userLogout();
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    autoLogin();
+  }, [getUser, userLogout]);
 
   return (
-    <UserContext.Provider value={{ data, login, loading, error, userLogin }}>
+    <UserContext.Provider
+      value={{ data, login, loading, error, userLogin, userLogout }}
+    >
       {children}
     </UserContext.Provider>
   );

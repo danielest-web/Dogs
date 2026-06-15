@@ -16,12 +16,13 @@ const LoginForm = () => {
     event.preventDefault();
 
     if (!username.validate() || !password.validate()) return;
+    //Se username não for válido OU password não for válido, pare a função.
 
     try {
       setLoading(true);
       setError(null);
       setSuccess(false);
-
+      /*se você tentou logar antes e deu erro, não quer que o erro antigo fique aparecendo numa nova tentativa*/
       const response = await fetch(
         'https://dogsapi.origamid.dev/json/jwt-auth/v1/token',
         {

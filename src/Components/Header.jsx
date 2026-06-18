@@ -15,7 +15,7 @@ const Header = () => {
         </Link>
         {data ? (
           <div className={styles.user}>
-            <Link className={styles.login} to="/conta">
+            <Link className={`${styles.login} ${styles.account}`} to="/conta">
               {data.nome}
             </Link>
             <button type="button" onClick={userLogout} className={styles.button}>
@@ -23,9 +23,14 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          <Link className={styles.login} to="/login">
-            Login / Criar
-          </Link>
+          <div className={styles.auth}>
+            <Link className={styles.login} to="/login">
+              Login
+            </Link>
+            <Link className={styles.create} to="/login/criar">
+              Criar
+            </Link>
+          </div>
         )}
       </nav>
     </header>

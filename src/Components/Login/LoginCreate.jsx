@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Input from '../Forms/Input';
 import Button from '../Forms/Button';
 import useForm from '../../Hooks/userForm';
+import styles from './LoginCreate.module.css';
 
 const LoginCreate = () => {
   const username = useForm();
@@ -20,10 +21,12 @@ const LoginCreate = () => {
   }
 
   return (
-    <div>
-      <h1>Crie sua conta</h1>
-      <p>Preencha seus dados para cadastrar um novo usuario.</p>
-      <form onSubmit={handleSubmit}>
+    <section className="animeLeft">
+      <h1 className="title">Crie sua conta</h1>
+      <p className={styles.description}>
+        Preencha seus dados para cadastrar um novo usuario.
+      </p>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Input
           label="Usuario"
           type="text"
@@ -51,11 +54,15 @@ const LoginCreate = () => {
           onBlur={password.onBlur}
           error={password.error}
         />
-        {success ? <p>Formulario validado com sucesso.</p> : null}
+        {success ? (
+          <p className={styles.success}>Formulario validado com sucesso.</p>
+        ) : null}
         <Button>Cadastrar</Button>
       </form>
-      <Link to="/login">Voltar para login</Link>
-    </div>
+      <Link className={styles.back} to="/login">
+        Voltar para login
+      </Link>
+    </section>
   );
 };
 export default LoginCreate;

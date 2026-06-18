@@ -1,0 +1,46 @@
+.footer {
+  background: #fb1;
+  padding: 3rem 1rem;
+  color: #764701;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.content p {
+  font-size: 1rem;
+}
+
+.dog {
+  overflow: visible;
+}
+
+.dog circle {
+  animation: blink 4s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  95%,
+  97% {
+    transform: scaleY(0.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dog circle {
+    animation: none;
+  }
+}

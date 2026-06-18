@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
+import Error from "../Helper/Error";
 import useForm from "../../Hooks/userForm";
 import { UserContext } from "../../UserContext";
+import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
   const username = useForm();
@@ -21,9 +23,9 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <section className="animeLeft">
+      <h1 className="title">Login</h1>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Input
           label="Usuario"
           type="text"
@@ -42,7 +44,7 @@ const LoginForm = () => {
           onBlur={password.onBlur}
           error={password.error}
         />
-        {error ? <p>{error}</p> : null}
+        <Error error={error} />
         {success ? <p>Sucesso ao fazer login.</p> : null}
         {loading ? (
           <Button disabled>Carregando...</Button>
@@ -52,10 +54,21 @@ const LoginForm = () => {
           </Button>
         )}
       </form>
-      <Link to="/login/perdeu">Perdeu a senha?</Link>
-      <br />
-      <Link to="/login/criar">Crie sua conta</Link>
-    </div>
+      <Link className={styles.perdeu} to="/login/perdeu">
+        Perdeu a senha?
+      </Link>
+      <section className={styles.cadastro}>
+        <h2 className={styles.subtitle}>Cadastre-se</h2>
+        <p>
+          Ainda nao tem uma conta? Crie seu cadastro para compartilhar fotos dos
+          seus dogs.
+        </p>
+        <Link className={styles.criar} to="/login/criar">
+          Criar conta
+        </Link>
+      </section>
+    </section>
   );
 };
+
 export default LoginForm;

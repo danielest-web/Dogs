@@ -1,5 +1,6 @@
 .wrapper {
   margin-bottom: 1rem;
+  position: relative;
 }
 
 .input {
@@ -25,10 +26,20 @@
   display: block;
   font-size: 1rem;
   line-height: 1;
-  line-height: 0.5rem;
+  margin-bottom: 0.5rem;
 }
+
 .error {
   color: #f31;
   font-size: 0.87rem;
-  margin-top: 0.25rem;
+  line-height: 1;
+  margin: 0;
+  max-width: 70%;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  text-overflow: ellipsis;
+  top: 0;
+  white-space: nowrap;
 }

@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Spectral:wght@700&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -5,8 +8,8 @@
 body {
   margin: 0px;
   color: #333;
-  --type-first: Helvetica, Arial, sans-serif;
-  --type-second: 'Spectral ', Georgia;
+  --type-first: "DM Sans", Helvetica, Arial, sans-serif;
+  --type-second: "Spectral", Georgia, serif;
   font-family: var(--type-first);
 }
 
@@ -40,6 +43,7 @@ input {
 
 a {
   text-decoration: none;
+  color: #333;    
 }
 
 .container {
@@ -55,3 +59,37 @@ a {
 .appBody {
   padding-top: 5rem;
 }
+
+.title {
+  font-family: var(--type-second);  
+  line-height: 1.2;
+  font-size: 3rem;
+  margin: 1rem 0;
+  position: relative;  
+  z-index: 1;
+}   
+
+.title::after {
+  content: "";
+  display: block;   
+  position: absolute;
+  left: -0.35rem;
+  top: 1.45rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #fb1;
+  border-radius: 0.25rem;
+  z-index: -1;
+}
+.animeLeft {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: animeLeft 0.5s forwards;
+}
+
+@keyframes animeLeft {
+  to {
+    opacity: 1;
+    transform: initial;
+  }
+} 

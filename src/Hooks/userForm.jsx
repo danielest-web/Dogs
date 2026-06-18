@@ -7,17 +7,20 @@ const validators = {
     empty: 'Preencha o email',
     message: 'Preencha um email valido',
   },
+  password: {
+    regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
+    empty: 'Preencha a senha',
+    message: 'Use 8+ caracteres, maiuscula, numero e simbolo',
+  },
 };
 
 const useForm = (type) => {
-  console.log("aqui e o valor tipo" ,type);
   //o que e  esse type que a gente ta passando aqui? Ele é o tipo do input, ou seja, se for email, ele vai validar o email, se for password, ele vai validar a senha, e assim por diante. Se for false, ele não vai validar nada, ou seja, qualquer valor é valido.
 
   const [value, setValue] = React.useState('');
   const [error, setError] = React.useState(null);
 
   function validate(currentValue) {
-    console.log("aqui e o valor do currentValue" ,currentValue);
     if (type === false) return true;
 
     const sanitizedValue = String(currentValue ?? '').trim();

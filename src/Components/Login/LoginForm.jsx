@@ -9,7 +9,7 @@ import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
   const username = useForm();
-  const password = useForm();
+  const password = useForm("password");
   const { userLogin, loading, error } = React.useContext(UserContext);
   const [success, setSuccess] = React.useState(false);
 

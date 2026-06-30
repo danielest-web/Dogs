@@ -49,9 +49,7 @@ const LoginForm = () => {
         {loading ? (
           <Button disabled>Carregando...</Button>
         ) : (
-          <Button disabled={loading}>
-            {loading ? "Acessando..." : "Entrar"}
-          </Button>
+          <Button>Entrar</Button>
         )}
       </form>
       <Link className={styles.perdeu} to="/login/perdeu">

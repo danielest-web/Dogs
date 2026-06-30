@@ -6,38 +6,24 @@ import LoginCreate from './LoginCreate';
 import LoginPasswordLost from './LoginPasswordLost';
 import LoginPasswordReset from './LoginPasswordReset';
 import styles from './Login.module.css';
+
 const Login = () => {
   const { login } = React.useContext(UserContext);
-  if(login === true) return <Navigate to="/conta" />;
+
+  if (login === true) return <Navigate to="/conta" />;
+
   return (
     <section className={styles.login}>
       <div className={styles.forms}>
-      <Routes>
-        <Route index element={<LoginForm />} />
-        /*Se a pessoa entrou exatamente em /login,
-          mostre LoginForm*/
-        <Route path="criar" element={<LoginCreate />} />
-        <Route path="perdeu" element={<LoginPasswordLost />} />
-        <Route path="resetar" element={<LoginPasswordReset />} />
-      </Routes>
+        <Routes>
+          <Route index element={<LoginForm />} />
+          <Route path="criar" element={<LoginCreate />} />
+          <Route path="perdeu" element={<LoginPasswordLost />} />
+          <Route path="resetar" element={<LoginPasswordReset />} />
+        </Routes>
       </div>
     </section>
   );
 };
 
 export default Login;
-
-//Se a pessoa entrou exatamente em /login,
-//mostre LoginForm
-
-/*
-/login/* abre a porta para a área de login.
-
-Dentro dessa área:
-
-index   → /login
-criar   → /login/criar
-perdeu  → /login/perdeu
-resetar → /login/resetar
-
-*/

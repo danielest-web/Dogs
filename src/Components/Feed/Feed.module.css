@@ -1,0 +1,80 @@
+.feed {
+  margin-top: 2.75rem;
+  padding-bottom: 2rem;
+}
+
+.subtitle {
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.5rem;
+}
+
+.photo {
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.photo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #eee;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.85rem;
+  font-size: 0.875rem;
+}
+
+.info span:first-child {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.views {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+.views img {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.7;
+}
+
+.status,
+.empty {
+  padding: 1.25rem;
+  border-radius: 0.25rem;
+  background: #f7f7f7;
+  color: #666;
+}
+
+.empty {
+  border-left: 4px solid #fb1;
+}

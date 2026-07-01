@@ -1,6 +1,10 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import Feed from './Feed/Feed';
+import FeedHeader from './Feed/FeedHeader';
+import FeedPhotoPost from './Feed/FeedPhotoPost';
+import FeedStats from './Feed/FeedStats';
 
 const Account = () => {
   const { data, login } = React.useContext(UserContext);
@@ -9,8 +13,14 @@ const Account = () => {
 
   return (
     <section className="container">
-      <h1 className="title">Minha conta</h1>
+      <FeedHeader />
       {data ? <p>Bem-vindo, {data.nome || data.username}.</p> : null}
+      <Routes>
+        <Route path="/" element={<Feed user={data?.id} />} />
+        <Route path="estatisticas" element={<FeedStats user={data?.id} />} />
+        <Route path="adicionar" element={<FeedPhotoPost title="Adicionar fotos" />} />
+        <Route path="postar" element={<FeedPhotoPost title="Postar fotos" />} />
+      </Routes>
     </section>
   );
 };

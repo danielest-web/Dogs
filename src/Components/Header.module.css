@@ -95,19 +95,31 @@
 .user {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .button {
-  background: transparent;
-  border: 0;
-  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: #f7f7f7;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
   cursor: pointer;
-  font: inherit;
   padding: 0;
 }
 
 .button:hover,
 .button:focus {
-  text-decoration: underline;
+  background: white;
+  border-color: #fb1;
+  box-shadow: 0 0 0 3px #fea;
+  outline: none;
+}
+
+.button img {
+  width: 1.125rem;
+  height: 1.125rem;
 }

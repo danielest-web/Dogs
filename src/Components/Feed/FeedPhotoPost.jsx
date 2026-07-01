@@ -10,7 +10,7 @@ import styles from './FeedPhotoPost.module.css';
 
 const FeedPhotoPost = ({ title }) => {
   const nome = useForm(false);
-  const peso = useForm(false);
+  const peso = useForm('peso');
   const idade = useForm(false);
   const [img, setImg] = React.useState({});
   const [imgError, setImgError] = React.useState(null);

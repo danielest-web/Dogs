@@ -12,6 +12,11 @@ const validators = {
     empty: 'Preencha a senha',
     message: 'Use 8+ caracteres, maiuscula, numero e simbolo',
   },
+  peso: {
+    regex: /^\d+(\.\d{1,2})?$/,
+    empty: 'Preencha o peso',
+    message: 'Use apenas numeros. Ex: 10 ou 10.5',
+  },
 };
 
 const useForm = (type) => {

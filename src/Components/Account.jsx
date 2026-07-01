@@ -23,7 +23,8 @@ const Account = () => {
       <FeedHeader />
       {data ? <p>Bem-vindo, {data.nome || data.username}.</p> : null}
       <Routes>
-        <Route path="/" element={<Feed user={data?.id} />} />
+        <Route path="/" element={<Feed user={data?.id} title="Minhas fotos" />} />
+        <Route path="home" element={<Feed user={0} title="Home" />} />
         <Route path="estatisticas" element={<FeedStats user={data?.id} />} />
         <Route path="adicionar" element={<FeedPhotoPost title="Adicionar fotos" />} />
         <Route path="postar" element={<FeedPhotoPost title="Postar fotos" />} />

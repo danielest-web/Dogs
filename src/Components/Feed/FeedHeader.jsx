@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import home from '../../Assets/home.svg?url';
 import feed from '../../Assets/feed.svg?url';
 import estatisticas from '../../Assets/estatisticas.svg?url';
 import adicionar from '../../Assets/adicionar.svg?url';
@@ -34,6 +35,10 @@ const FeedHeader = () => {
         className={`${styles.nav} ${mobileMenu ? styles.navActive : ''}`}
         aria-label="Menu da conta"
       >
+        <NavLink to="/conta/home" title="Home" onClick={closeMobileMenu}>
+          <img src={home} alt="" />
+          Home
+        </NavLink>
         <NavLink to="/conta" end title="Minhas fotos" onClick={closeMobileMenu}>
           <img src={feed} alt="" />
           Minhas fotos

@@ -90,6 +90,21 @@ a {
   animation: animeLeft 0.5s forwards;
 }
 
+.loadingPage {
+  display: grid;
+  min-height: 16rem;
+  place-items: center;
+  color: #666;
+  font-weight: 700;
+}
+
+.loadingPage p {
+  padding: 1rem 1.25rem;
+  border-radius: 0.25rem;
+  background: #f7f7f7;
+  border-left: 4px solid #fb1;
+}
+
 @keyframes animeLeft {
   to {
     opacity: 1;

@@ -5,7 +5,7 @@ export const UserContext = React.createContext();
 
 export const UserStorage = ({ children }) => {
   const [data, setData] = React.useState(null);
-  const [login, setLogin] = React.useState(false);
+  const [login, setLogin] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
@@ -66,7 +66,10 @@ export const UserStorage = ({ children }) => {
     async function autoLogin() {
       const token = window.localStorage.getItem("token");
 
-      if (!token) return;
+      if (!token) {
+        setLogin(false);
+        return;
+      }
 
       try {
         setError(null);
@@ -79,7 +82,9 @@ export const UserStorage = ({ children }) => {
 
         await getUser(token);
       } catch (err) {
-        userLogout();
+        setData(null);
+        setLogin(false);
+        window.localStorage.removeItem("token");
         setError(err.message);
       } finally {
         setLoading(false);
@@ -87,7 +92,7 @@ export const UserStorage = ({ children }) => {
     }
 
     autoLogin();
-  }, [getUser, userLogout]);
+  }, [getUser]);
 
   return (
     <UserContext.Provider

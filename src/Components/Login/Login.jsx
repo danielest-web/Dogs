@@ -10,6 +10,15 @@ import styles from './Login.module.css';
 const Login = () => {
   const { login } = React.useContext(UserContext);
 
+  if (login === null) {
+    return (
+      <section className={styles.login}>
+        <div className="loadingPage">
+          <p>Verificando login...</p>
+        </div>
+      </section>
+    );
+  }
   if (login === true) return <Navigate to="/conta" />;
 
   return (

@@ -9,6 +9,13 @@ import FeedStats from './Feed/FeedStats';
 const Account = () => {
   const { data, login } = React.useContext(UserContext);
 
+  if (login === null) {
+    return (
+      <section className="container loadingPage">
+        <p>Verificando login...</p>
+      </section>
+    );
+  }
   if (login === false) return <Navigate to="/login" />;
 
   return (
